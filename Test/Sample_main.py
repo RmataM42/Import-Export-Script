@@ -18,6 +18,7 @@ except PermissionError:
 
 
 # Debug: See if xytech_folders[] comes out correctly
+# print("\nDebug test:  xytech_folders[]\n")
 # for x, folder in enumerate(xytech_folders, start=1):
 #     print(x, folder.strip())
 
@@ -47,12 +48,26 @@ try:
             # print(n, line_replace)
             # n+=1
 
-            # Compare Baselight.txt w/ Xytech.txt to find matching txt
-            # new_location = ""
-            # for xytech_check in xytech_folders:
-            #     if line_replace in xytech_check:
-            #         new_location = xytech_check.strip()
-                    # print(new_location)
+            # Compare Baselight.txt to Xytech.txt to find matching txt
+            # !STILL don't know how new_path comes out to match 15 of baselight
+            new_file_path = ""
+            for xytech_check in xytech_folders:
+                if line_replace in xytech_check:
+
+                    # debug test: line_replace
+                    # print(n, line_replace)
+                    # n+=1 
+
+                    # debug test: xytech_check 
+                    # print(n, xytech_check.strip())
+                    # n+=1
+
+                    new_file_path = xytech_check.strip()
+                    # debug test: new_file_path 
+                    print(n, new_file_path)
+                    n+=1
+
+                    
 except FileNotFoundError:
     print("Baselight_export.txt file not found.")
 except PermissionError:
