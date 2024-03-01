@@ -1,2 +1,2 @@
-/baselightfilesystem1/Dune2/reel1/partA/1920x1080 2 3 4 
-
+/baselightfilesystem1/Dune2/reel1/partA/1920x1080 2 3 4 31 32 33 67 68 69 70 122 123 155 1023 1111 1112 1160 1201 1202 1203 1204 1205 1211 1212 1213 1214 1215
+/baselightfilesystem1/Dune2/reel1/VFX/Hydraulx 1251 1252 1253 1260 <err> 1270 1271 1272
