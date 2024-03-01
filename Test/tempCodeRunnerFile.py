@@ -1,0 +1,1 @@
+line_pop = line_split.pop(0)
