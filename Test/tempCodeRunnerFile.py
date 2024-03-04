@@ -1,1 +1,2 @@
-line_pop = line_split.pop(0)
+_frame)
+                n+=1

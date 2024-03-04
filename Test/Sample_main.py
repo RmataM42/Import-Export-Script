@@ -37,6 +37,7 @@ try:
             # n+=1
 
             # Pop 1st element in list which is always file path
+            # After line_pop: line_split will only contains frame number
             line_pop = line_split.pop(0)
                 # debug line_pop
             # print(n, line_pop)
@@ -53,21 +54,76 @@ try:
             new_file_path = ""
             for xytech_check in xytech_folders:
                 if line_replace in xytech_check:
-
-                    # debug test: line_replace
+                        # debug test: line_replace
                     # print(n, line_replace)
                     # n+=1 
-
-                    # debug test: xytech_check 
+                        # debug test: xytech_check 
                     # print(n, xytech_check.strip())
                     # n+=1
-
                     new_file_path = xytech_check.strip()
-                    # debug test: new_file_path 
-                    print(n, new_file_path)
-                    n+=1
+                        # debug test: new_file_path 
+                    # print(n, new_file_path)
+                    # n+=1
 
-                    
+            #Frame Computation
+            head = ""
+            curr = ""
+            last = ""
+            for frame in line_split:
+                # eliminate whitespace in frame list in case of error in script
+                # stripped_frame will contonuosly looping (incremeting) throughtout the list
+                stripped_frame = frame.strip()
+                    # debug test: stripped_frame
+                # print(n, stripped_frame)
+                # n+=1
+
+                # Check if frame contains <err> and <null> 
+                if not stripped_frame.isnumeric():
+                    continue
+                # Assign pointer head and curr to 1st frame of every line in list
+                if head == "":
+                    head = int(stripped_frame)
+                    curr = head
+                        # Debug test: head and curr pointer
+                    # print(f"1st if, head: {head}, curr: {curr}, last: {last}")
+                    # print(f"stripped_frame: {stripped_frame} ")
+                    continue
+                    # Debug end of line, test head pointer position base on line 1
+                # if stripped_frame ==  1251:
+                #     print ((f"End of line 1, head: {head}, curr: {curr}, last: {last}"))
+
+                if int(stripped_frame) == (curr+1):
+                    curr = int(stripped_frame)
+                        # Debug test: head and curr pointer
+                    # print(f"2nd if, head: {head}, curr: {curr}, last: {last}")
+                    # print(f"stripped_frame: {stripped_frame} ")
+                    continue
+                else:
+                    # if next frame "skips", ex: 4 -> 31
+                    last = curr
+                    # if it is an alone frame
+                    if head == last:
+                        print ("%s %s" % (new_file_path, head))
+                    else:
+                        print ("%s %s-%s" % (new_file_path, head, last))
+                    # proceed to next frame iteration
+                    # head points @ next frame after last succesful frame conputation, hence reset
+                    head= int(stripped_frame)
+                    curr=head
+                    last=""
+            #End of the line     
+            last = curr
+            if head != "":
+                if head == last:
+                    print ("%s %s" % (new_file_path, head))
+                        # Debug test: End of line alone frame
+                    # print(f"\nLine {n} Alone last, head: {head}, curr: {curr}, last: {last}\n")
+                    # n+=1
+                else:
+                    print ("%s %s-%s" % (new_file_path, head, last))
+                        # Debug test: End of line group frame
+                    # print(f"\nLine {n} Group last, head: {head}, curr: {curr}, last: {last}\n")
+                    # n+=1
 except FileNotFoundError:
     print("Baselight_export.txt file not found.")
 except PermissionError:
